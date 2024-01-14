@@ -1,0 +1,202 @@
+{% extends "layouts/base-new.html" %} {% load static %} {% load custom_func %}
+{% block style %}
+<link href="{% static 'css/flights.css' %}" rel="stylesheet" />
+<link href="{% static 'css/custome.css' %}" rel="stylesheet" />
+{% endblock style %} {% block header %} {% include 'layouts/header.html' %} 
+
+{%endblock header %} {% block content %}
+
+
+
+<main class="main bg-secondary" style="--bs-bg-opacity: .1;">
+  <div class="wrap-2">
+    <div class="tab-section-home tab-search-inner">
+      <div class="container">
+        <div class="row">
+        <div class="left col-md-3">
+          <div class="profile_item">
+              <div class="profile">
+                  <img class="img" src="https://thumbs.dreamstime.com/b/unknown-male-avatar-profile-image-businessman-vector-unknown-male-avatar-profile-image-businessman-vector-profile-179373829.jpg" alt="">
+                   <p class="edit"><i class="fa-solid fa-pen-to-square icon"></i><span class="edit">Edit</span></p>
+              </div>
+              
+              <div class="profile_manu">
+                  <p class="item">
+                      <i class="fa-solid fa-user"></i>
+                      <span>Personal Info</span>
+                  </p>
+                  <p class="item">
+                      <i class="fa-regular fa-people-simple"></i>
+                      <span>Travelers</span>
+                  </p>
+                  <p class="item">
+                      <i class="fa-solid fa-gear"></i>
+                      <span>Settings</span>
+                  </p>
+                  <p class="logout">
+                      <span>Log Out</span>
+                  </p>
+              </div>
+          </div>
+       </div>
+ 
+        <div class="col-md-9 my-booking-content-section">
+        <h2 class="title" style="text-align: center;  color:#8C094C">
+          My order List:</h2>
+        {% for order in order_details %}
+        {% for traveler in traveler_info %}
+        <article class="full-width">
+          <div class="">
+            <div class="flight-item">
+              <div class="">
+                <h6 class="p-3">Flight Informations :</h6>
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Flight Destination:</th>
+                      <th scope="col">Total Amount:</th>
+                      <th scope="col">Price:</th>
+                      <th scope="col">Currency:</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">{{order.flight_offer.name}}</th>
+                      <td>{{order.amount}}</td>
+                      <td>{{order.flight_offer.price}}</td>
+                      <td>{{order.flight_offer.currency}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              
+              <div>
+
+
+
+              <div class="detailed-line">
+                <div class="bottom-links">
+                 
+                  <div class="show-more show-more-btn">
+                    <a
+                    style="color:#8C094C"
+                      class="toggle-icon"
+                      data-bs-toggle="collapse"
+                      href="#a{{ counter }}"
+                      aria-expanded="false"
+                      aria-controls="a{{ counter }}"
+                    >
+                    Travelers parsonal Informations
+                      <i class="fas fa-chevron-down"></i>
+                    </a>
+                  </div>
+
+
+                  {% comment %} <div class="show-more detail">
+                    <a
+                    style="color:#8C094C"
+                      class="toggle-icon"
+                      data-bs-toggle="collapse"
+                      href="#a{{ counter }}"
+                      aria-expanded="false"
+                      aria-controls="a{{ counter }}"
+                    >
+                    Travelers parsonal Informations
+                      <i class="fas fa-chevron-down"></i>
+                    </a>
+                  </div> {% endcomment %}
+                </div>
+
+                
+                <div class=" collapse" id="a{{ counter }}">
+                  <div class="">
+                    <!-- Tab content -->
+
+                  <h6 class="p-3">Travelers parsonal Informations: </h6>
+                 
+                  <table class="table">
+                      <tbody>
+                        <tr>
+                          <th class="tr" scope="row">Bookin Id:</th>
+                          <td class="tr">{{traveler.index }}</td>
+                        </tr>
+                        <tr>
+                          <th class="tr" scope="row">First Name:</th>
+                          <td class="tr">{{traveler.first_name }}
+                          </td>
+                        </tr>
+                        <tr>
+                          <th class="tr" scope="row">Middle Name</th>
+                          <td class="tr">{{traveler.middle_name}}</td>
+                        </tr>
+                        <tr>
+                          <th class="tr" scope="row">Last Name</th>
+                          <td class="tr">{{traveler.last_name }}</td>
+                        </tr>
+                        <tr>
+                          <th class="tr" scope="row">Gender</th>
+                          <td class="tr">{{traveler.gender }}</td>
+                        </tr>
+                        <tr>
+                          <th class="tr" scope="row">Date Of Birth</th>
+                          <td class="tr">{{traveler.date_of_birth }}</td>
+                        </tr>
+                        <tr>
+                          <th class="tr" scope="row">Email Address</th>
+                          <td class="tr">{{traveler.email_address }}</td>
+                        </tr>
+                        <tr>
+                          <th class="tr" scope="row">Phone</th>
+                          <td class="tr">{{traveler.phone }}</td>
+                        </tr>
+                        <tr>
+                          <th class="tr" scope="row">Passport Number</th>
+                          <td class="tr">{{traveler.passport_number}}</td>
+                        </tr>
+                        <tr>
+                          <th class="tr" scope="row">Passport Country</th>
+                          <td class="tr">{{traveler.passport_country }}</td>
+                        </tr>
+                        <tr>
+                          <th class="tr" scope="row">Passport Expiry Date</th>
+                          <td class="tr">{{traveler.passport_expiry_date }}</td>
+                        </tr>
+                        <tr>
+                          <th class="tr" scope="row">Passport Issue Date</th>
+                          <td class="tr">{{traveler.passport_issue_date }}</td>
+                        </tr>
+                        <tr>
+                          <th class="tr" scope="row">Type</th>
+                          <td class="tr">{{traveler.type }}</td>
+                        </tr>
+                        <tr>
+                          <th class="tr" scope="row">Country</th>
+                          <td class="tr">{{traveler.country }}</td>
+                        </tr>
+                       
+                        <tr>
+                          <th class="tr" scope="row">Issue Date:</th>
+                          <td class="tr">{{traveler.created_on }}</td>
+                        </tr>     
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+        {% endfor %}
+        {% endfor %}
+       </div>
+      </div>
+      <div>
+
+
+
+
+
+    </div>
+  </div>
+</main>
+{% endblock content %} 
+{% block javascript %} {% endblock javascript %}
